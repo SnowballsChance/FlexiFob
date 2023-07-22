@@ -1,5 +1,5 @@
 # FlexiFob
-Flexible holder for RFID stickers
+Flexible holder for RFID stickers. Intended to be printed with TPU, but will work well with any filament.
 
 OpenSCAD script for a flexible fob that can hold an RFID sticker.
 
