@@ -7,3 +7,4 @@ Fully parametric just enter the dimensions you want and the script will look aft
 
 Utilises the terrific [BOSL2 library](https://github.com/BelfrySCAD/BOSL2) the library is included here for simplicity, have a look at their GitHub to see how to best use it.
 
+![Rendered image of the fob. do_hat = true, do_keyring_hole = true, chamfer = true, ](flexi_fob-small.png)
