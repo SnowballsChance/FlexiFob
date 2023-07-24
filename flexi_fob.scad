@@ -37,7 +37,7 @@ module __Customizer_Limit__()
 } // end module __Customizer_Limit__
 
 rfid_r = rfid_diameter / 2;
-chamfer_size = do_chamfer ?  top_thickness + bottom_thickness : undef;
+chamfer_size = do_chamfer ?  top_thickness + bottom_thickness : undef;  // using undef causes the cyl operator to act as if chamfer was never requested, if 0 then chamfer is built but may error
 
 
 // display model settings
