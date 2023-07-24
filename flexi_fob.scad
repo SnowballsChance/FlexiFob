@@ -3,10 +3,10 @@
 
         BOSL2 Library is included with this file available from https://github.com/BelfrySCAD/BOSL2/
 
-        flexi_fob.scad © 2023 by Snowball's Chance is licensed under CC BY-SA 4.0.
+        flexi_fob © 2023 by Snowball's Chance is licensed under CC BY-SA 4.0.
         To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/
 
-        // a very minor update
+         Remixing encouraged - attribution appreciated.
 */
 
 // Libraries
