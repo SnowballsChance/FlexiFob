@@ -1,0 +1,25 @@
+{
+    "fileFormatVersion": "1",
+    "parameterSets": {
+        "New set 1": {
+            "bottom_thickness": "0.59999999999999998",
+            "do_chamfer": "b",
+            "do_hat": "true",
+            "do_keyring_hole": "true",
+            "rfid_diameter": "25.399999999999999",
+            "rfid_thickness": "0.59999999999999998",
+            "top_thickness": "0.59999999999999998",
+            "wall_thickness": "2"
+        },
+        "New set 2": {
+            "bottom_thickness": "0.59999999999999998",
+            "do_chamfer": "b",
+            "do_hat": "true",
+            "do_keyring_hole": "true",
+            "rfid_diameter": "25.399999999999999",
+            "rfid_thickness": "0.59999999999999998",
+            "top_thickness": "0.59999999999999998",
+            "wall_thickness": "2"
+        }
+    }
+}
