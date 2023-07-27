@@ -50,7 +50,6 @@ fob_radius = fob_diameter / 2;
 hat_diameter = fob_diameter * 0.75;
 hat_radius = hat_diameter / 2;
 
-
 // display model settings
 echo();
 echo(model_name = model_name, model_version = model_version);
@@ -62,73 +61,67 @@ echo("\n");
 
 render(2)
     diff()
+    {
+
+      if (do_chamfer == "n")
+        cyl(r = fob_radius, h = top_thickness + bottom_thickness + rfid_thickness );  // main body
+      
+      if (do_chamfer == "u")
+        cyl(r = rfid_r + get_slop() + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer2 = ch_up_low );  // main body
+
+      if (do_chamfer == "l")
+        cyl(r = rfid_r + get_slop() + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer1 = ch_up_low );  // main body
+
+      if (do_chamfer == "b")
+        cyl(r = rfid_r + get_slop() + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer1 = ch_both, chamfer2 = ch_both );  // main body
+
+      if (do_chamfer == "r")
       {
+        cyl(r = fob_radius - fob_thickness, h = fob_thickness);  // main body
+        rotate_extrude(convexity = 10)
+        translate([fob_radius - fob_thickness, 0, 0])
+        circle(d = top_thickness + bottom_thickness + rfid_thickness);
+      }  //  end if do_chamfer r
 
-        if (do_chamfer == "n")
-          cyl(r = fob_radius, h = top_thickness + bottom_thickness + rfid_thickness );  // main body
-        
-        if (do_chamfer == "u")
-          cyl(r = rfid_r + get_slop() + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer2 = ch_up_low );  // main body
+      if (do_hat)
+      {
+        back(rfid_diameter * 0.3)
+        {
+          // cyl(r = (rfid_r + get_slop()) / 1.8 + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer1 = ch_up_low, chamfer2 = ch_up_low);  // hat
 
-        if (do_chamfer == "l")
-          cyl(r = rfid_r + get_slop() + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer1 = ch_up_low );  // main body
+          if (do_chamfer == "n")
+            cyl(r = hat_radius, h = fob_thickness); // hat
 
-        if (do_chamfer == "b")
-          cyl(r = rfid_r + get_slop() + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer1 = ch_both, chamfer2 = ch_both );  // main body
+          if (do_chamfer == "u")
+            cyl(r = hat_radius, h = fob_thickness, chamfer2 = ch_up_low);  // hat
 
-        if (do_chamfer == "r")
+          if (do_chamfer == "l")
+            cyl(r = hat_radius, h = fob_thickness, chamfer1 = ch_up_low);  // hat
+
+          if (do_chamfer == "b")
+            cyl(r = hat_radius, h = fob_thickness, chamfer1 = ch_both, chamfer2 = ch_both);  // hat
+          if (do_chamfer == "r")
           {
-            cyl(r = fob_radius - fob_thickness, h = fob_thickness);  // main body
+            cyl(r = hat_radius - fob_thickness, h = fob_thickness); // hat
             rotate_extrude(convexity = 10)
-            translate([fob_radius - fob_thickness, 0, 0])
+            translate([hat_radius - fob_thickness, 0, 0])
             circle(d = top_thickness + bottom_thickness + rfid_thickness);
-          }
+          }  //  end if do_chamfer = r
+        } // end_back
 
+      }  //  end if do_hat 
 
+      tag("remove")
+      {
+        if (do_keyring_hole)
+          back(fob_radius)
+            yrot(90)
+              cyl(r = 1.6, h=9, rounding = 1.49);  //keyring_hole
 
-        if (do_hat)
-          {
-            back(rfid_diameter * 0.3)
-              {
-                // cyl(r = (rfid_r + get_slop()) / 1.8 + wall_thickness, h = top_thickness + bottom_thickness + rfid_thickness, chamfer1 = ch_up_low, chamfer2 = ch_up_low);  // hat
+        cyl(r = rfid_r + get_slop() * 2, h = rfid_thickness);  // make the void for the RFID tag
+        
+        *left(20) down(10)   // for testing. Cuts model in half so the void can be observed
+            cube(40);
 
-                if (do_chamfer == "n")
-                  cyl(r = hat_radius, h = fob_thickness); // hat
-
-                if (do_chamfer == "u")
-                  cyl(r = hat_radius, h = fob_thickness, chamfer2 = ch_up_low);  // hat
-
-                if (do_chamfer == "l")
-                  cyl(r = hat_radius, h = fob_thickness, chamfer1 = ch_up_low);  // hat
-
-                if (do_chamfer == "b")
-                  cyl(r = hat_radius, h = fob_thickness, chamfer1 = ch_both, chamfer2 = ch_both);  // hat
-                if (do_chamfer == "r")
-                    {
-                      cyl(r = hat_radius - fob_thickness, h = fob_thickness); // hat
-                      rotate_extrude(convexity = 10)
-                      translate([hat_radius - fob_thickness, 0, 0])
-                      circle(d = top_thickness + bottom_thickness + rfid_thickness);
-                    }  //  end if do_chamfer = r
-              } // end_back
-
-          }  //  end if do_hat 
-
-
-
-
-
-        tag("remove")
-          {
-            if (do_keyring_hole)
-              back(fob_radius)
-                yrot(90)
-                  cyl(r = 1.6, h=9, rounding = 1.49);  //keyring_hole
-
-            cyl(r = rfid_r + get_slop() * 2, h = rfid_thickness);  // make the void for the RFID tag
-            
-            *left(20) down(10)   // for testing. Cuts model in half so the void can be observed
-                cube(40);
-
-          } //end tag remove
+      } //end tag remove
     } // end_diff
